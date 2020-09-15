@@ -5,8 +5,32 @@
 package main
 
 import (
-  "time"
+  "time";
+  "fmt";
+  "math/rand"
 )
+
+
+// Function to showcase concurrency
+// All helper functions can be found in conc.go
+func runConcurrency(n int){
+  fmt.Println("Running concurrency program")
+
+  // Array of size n to sum up
+  arr := rand.Perm(n)
+
+  // Sum using linear sum
+  linearSum,linearTime := concBenchmark(linearSumFunc, arr)
+  fmt.Println("\nUsing linear, non-concurrent system-")
+  fmt.Println("Sum: ", linearSum)
+  fmt.Println("Time taken: ", linearTime)
+
+  // Sum using concurrent program
+  concSum,concTime := concBenchmark(concSumFunc, arr)
+  fmt.Println("\nUsing Concurrency (2 parallel systems)-")
+  fmt.Println("Sum: ", concSum)
+  fmt.Println("Time taken: ", concTime)
+}
 
 // Function to run a passed input function and return
 // result and time taken
